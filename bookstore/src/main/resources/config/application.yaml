@@ -1,0 +1,31 @@
+server:
+  context-path: /rest/xuhuang/bookstore
+spring:
+  profiles:
+    active: pro
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookstore?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+logging:
+  level: warn
+  file: bookstore.log
+
+--- #开发环境
+server:
+  port: 8080
+spring:
+  profiles: dev
+
+--- #生产环境
+server:
+  port: 443
+  ssl:
+    key-store: classpath:certificate/www.post90s.cn.jks
+    key-store-password: 489ph590lm
+    key-store-type: JKS
+spring:
+  profiles: pro

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuhuang.dao.BookMapper">
+    <select id="queryAllBooks" resultType="com.xuhuang.model.Book">
+        SELECT * FROM XH_BOOK
+    </select>
+
+    <select id="selectBookCount" resultType="int">
+        SELECT COUNT(*) FROM XH_BOOK
+        <where>
+            <if test="name != '' and name != null">
+                and name like CONCAT('%', #{name} , '%')
+            </if>
+            <if test="type != '' and type != null">
+                and type = #{type}
+            </if>
+            <if test="author != '' and author != null">
+                and author like CONCAT('%', #{author} , '%')
+            </if>
+            <if test="adaptAge != '' and adaptAge != null">
+                and adaptAge = #{adaptAge}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryBooksByCondition" resultType="com.xuhuang.model.Book">
+        SELECT * FROM XH_BOOK
+        <where>
+            <if test="name != '' and name != null">
+                and name like CONCAT('%', #{name} , '%')
+            </if>
+            <if test="type != '' and type != null">
+                and type = #{type}
+            </if>
+            <if test="author != '' and author != null">
+                and author like CONCAT('%', #{author} , '%')
+            </if>
+            <if test="adaptAge != '' and adaptAge != null">
+                and adaptAge = #{adaptAge}
+            </if>
+        </where>
+        LIMIT #{dataStart}, #{pageSize}
+    </select>
+
+    <select id="querySingleBook" resultType="com.xuhuang.model.Book" parameterType="long">
+        SELECT * FROM XH_BOOK WHERE id = #{id}
+    </select>
+
+    <insert id="insertBooks">
+        INSERT INTO XH_BOOK(name, author, brief, cover, type, adaptAge, invNum) VALUES
+        <foreach collection="books" item="item" separator=",">
+            (#{item.name}, #{item.author}, #{item.brief}, #{item.cover}, #{item.type}, #{item.adaptAge}, #{item.invNum})
+        </foreach>
+    </insert>
+
+    <update id="updateSingleBook" parameterType="com.xuhuang.model.Book">
+        UPDATE XH_BOOK
+        <set>
+            <if test="book.name != null">
+                name = #{book.name},
+            </if>
+            <if test="book.author != null">
+                author = #{book.author},
+            </if>
+            <if test="book.brief != null">
+                brief = #{book.brief},
+            </if>
+            <if test="book.cover != null">
+                cover = #{book.cover},
+            </if>
+            <if test="book.type != null">
+                type = #{book.type},
+            </if>
+            <if test="book.adaptAge != null">
+                adaptAge = #{book.adaptAge},
+            </if>
+            <if test="book.invNum != null">
+                invNum = #{book.invNum}
+            </if>
+        </set>
+        WHERE id = #{book.id}
+    </update>
+
+    <delete id="deleteBooks" parameterType="long">
+        DELETE FROM XH_BOOK WHERE id IN
+        <foreach collection="ids" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
