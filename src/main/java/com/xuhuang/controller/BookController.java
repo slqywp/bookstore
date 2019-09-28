@@ -26,6 +26,7 @@ public class BookController
     //github测试 
     @Autowired
     private BookService bookService;
+//testPullPush
 
     @GetMapping
     public RestResponse getBooksByCondition(String name, String type, String author, String adaptAge, Integer pageNo, Integer pageSize)
