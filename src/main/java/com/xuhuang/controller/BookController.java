@@ -22,8 +22,9 @@ import static com.xuhuang.constant.ErrorConstant.PARAM_ERROR;
 @RequestMapping("/v1/book")
 public class BookController
 {
+    //没有pull直接 push的后果 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
-    //github测试 
+    //githubæµ‹è¯• 
     @Autowired
     private BookService bookService;
 //testPullPush
@@ -115,7 +116,7 @@ public class BookController
             response = new RestResponse(400, FAIL, e.getMessage());
         }
         return response; 
-//����git
+//²âÊÔgit
 
     }
 
