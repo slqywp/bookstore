@@ -113,8 +113,9 @@ public class BookController
             LOGGER.error("deleteBooks error, param is:" + ids);
             response = new RestResponse(400, FAIL, e.getMessage());
         }
-        return response;
-        //githubä¿®æ”¹
+        return response; 
+//²âÊÔgit
+
     }
 
 }
