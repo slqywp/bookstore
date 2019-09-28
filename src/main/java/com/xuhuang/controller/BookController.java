@@ -23,7 +23,7 @@ import static com.xuhuang.constant.ErrorConstant.PARAM_ERROR;
 public class BookController
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
-
+    //github测试 
     @Autowired
     private BookService bookService;
 
@@ -114,6 +114,7 @@ public class BookController
             response = new RestResponse(400, FAIL, e.getMessage());
         }
         return response;
+        //github修改
     }
 
 }
